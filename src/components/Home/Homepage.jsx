@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
-import { Typography, Table, Space, Button, Input } from "antd";
+import { Typography, Table, Space, Button, Input, Image } from "antd";
 import axios from "axios";
 import millify from "millify";
-import { SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined, VerticalAlignBottomOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import { Link } from "react-router-dom";
+import Loading from "./Loading";
 const { Title } = Typography;
 
 const Homepage = () => {
@@ -21,12 +21,12 @@ const Homepage = () => {
           Name: item.name,
           Price: `$${millify(item.price, {
             precision: 7,
-            lowercase: true
+            lowercase: true,
           })}`,
           Logo: item.logo_url,
           Market: `$${millify(item.market_cap)}`,
           High: `$${millify(item.high)}`,
-          Detail: item.id
+          Detail: item.id,
         }))
       );
     })
@@ -144,7 +144,7 @@ const Homepage = () => {
       dataIndex: "Logo",
       width: 50,
       key: "Logo",
-      render: (logo) => <img src={`${logo}`} style={{ width: 30 }} />,
+      render: (logo) => <Image src={`${logo}`} />,
     },
     {
       title: "Name",
@@ -174,11 +174,17 @@ const Homepage = () => {
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: 'Detail',
-      dataIndex: 'Detail',
-      key: 'Detail',
-      render: (link) => <a href={`/crypto/${link}`}>Detail</a>,
-    }
+      title: "Detail",
+      dataIndex: "Detail",
+      key: "Detail",
+      render: (link) => (
+        <a href={`/crypto/${link}`}>
+          <VerticalAlignBottomOutlined
+            style={{ color: "rgb(76, 51, 152)", fontSize: 30 }}
+          />
+        </a>
+      ),
+    },
   ];
 
   return (
@@ -187,16 +193,17 @@ const Homepage = () => {
         Top Cryptocurrencies by Market Cap
       </Title>
       {loading ? (
-        "Loading"
+        <Loading />
       ) : (
         <Table
           dataSource={data}
           columns={columns}
+          key={data}
           style={{
-            background: "rgb(0, 21, 41)",
-            padding: 20,
-            borderRadius: 10,
-            cursor: 'pointer',
+            background: "transparent",
+            padding: 10,
+            borderRadius: 50,
+            cursor: "pointer",
           }}
         />
       )}

@@ -22,12 +22,6 @@ function App() {
             <div className="routes">
               <Routes>
                 <Route exact path="/" element={<Homepage />} />
-                <Route exact path="/exchanges" element={<Exchanges />} />
-                <Route
-                  exact
-                  path="/cryptocurrencies"
-                  element={<Cryptocurrencies />}
-                />
                 <Route
                   exact
                   path="/crypto/:id"

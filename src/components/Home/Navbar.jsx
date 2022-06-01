@@ -39,7 +39,7 @@ const Navbar = () => {
             src="https://v2.cimg.co/p/crypto-news-logo.svg"
           />
           <Typography.Title level={5} className="logo-title">
-            <Link to="/home">CryptoParse</Link>
+            <Link to="/home" style={{color: '#ffd300'}}>CryptoParse</Link>
           </Typography.Title>
           <Button
             className="menu-control-container"
@@ -49,15 +49,9 @@ const Navbar = () => {
           </Button>
         </div>
         {activeMenu && (
-          <Menu theme="dark">
+          <Menu theme="dark" key={activeMenu} style={{background: 'rgb(76, 51, 152)'}}>
             <Menu.Item icon={<BankOutlined />}>
               <Link to="/">Home</Link>
-            </Menu.Item>
-            <Menu.Item icon={<StockOutlined />}>
-              <Link to="/cryptocurrencies">Cryptocurrencies</Link>
-            </Menu.Item>
-            <Menu.Item icon={<DashboardOutlined />}>
-              <Link to="/exchanges">Exchanges</Link>
             </Menu.Item>
             <Menu.Item icon={<ContainerOutlined />}>
               <Link to="/news">News</Link>
